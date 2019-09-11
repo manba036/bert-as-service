@@ -119,3 +119,8 @@ toy*.py
 .DS_Store
 toy*.py
 post/
+
+# mnb
+model/
+logs/
+tmp/

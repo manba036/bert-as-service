@@ -186,6 +186,28 @@ Note that you only need `pip install -U bert-serving-client` in this case, the s
 > - [Using `bert-as-service` to serve HTTP requests in JSON](#using-bert-as-service-to-serve-http-requests-in-json)
 > - [Starting `BertServer` from Python](#starting-bertserver-from-python)
 
+<h2 align="center">Getting Started (manba036 Special Edition)</h2>
+
+First on the terminal
+
+```bash
+git clone https://github.com/manba036/bert-as-service.git
+cd bert-as-service
+./run_local_with_english_model.sh
+```
+
+Then on another terminal
+
+```bash
+cd bert-as-service/client
+python3 setup.py install
+cd ..
+./test.py
+./run_tensorboard.sh
+```
+
+Then open http://localhost:6006 in your browser.
+
 
 <h2 align="center">Server and Client API</h2>
 <p align="right"><a href="#bert-as-service"><sup>▴ Back to top</sup></a></p>

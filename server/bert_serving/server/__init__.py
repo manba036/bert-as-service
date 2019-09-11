@@ -502,6 +502,9 @@ class BertWorker(Process):
 
             return EstimatorSpec(mode=mode, predictions={
                 'client_id': features['client_id'],
+                'input_ids'     : features['input_ids'],      # [mnb] debug
+                'input_mask'    : features['input_mask'],     # [mnb] debug
+                'input_type_ids': features['input_type_ids'], # [mnb] debug
                 'encodes': output[0]
             })
 
@@ -538,6 +541,10 @@ class BertWorker(Process):
         sink_embed.connect(self.sink_address)
         sink_token.connect(self.sink_address)
         for r in estimator.predict(self.input_fn_builder(receivers, tf, sink_token), yield_single_examples=False):
+            logger_mnb = set_logger(colored('ESTIMATOR', 'red'), self.verbose)
+            logger_mnb.info('input_ids     \n%s\n%s\n%s' % (type(r['input_ids']),      r['input_ids'].shape,      str(r['input_ids'])     ))
+            logger_mnb.info('input_mask    \n%s\n%s\n%s' % (type(r['input_mask']),     r['input_mask'].shape,     str(r['input_mask'])    ))
+            logger_mnb.info('input_type_ids\n%s\n%s\n%s' % (type(r['input_type_ids']), r['input_type_ids'].shape, str(r['input_type_ids'])))
             send_ndarray(sink_embed, r['client_id'], r['encodes'], ServerCmd.data_embed)
             logger.info('job done\tsize: %s\tclient: %s' % (r['encodes'].shape, r['client_id']))
 

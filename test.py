@@ -3,8 +3,15 @@
 
 from bert_serving.client import BertClient
 
-bc = BertClient()
-result = bc.encode(['First do it', 'then do it right', 'then do it better'])
+TEXT_LIST = [
+    'First do it',
+    'then do it right',
+    'then do it better'
+    ]
 
+bc = BertClient()
+result = bc.encode(TEXT_LIST)
+
+print(TEXT_LIST)
 print(result)
 print(result.shape)

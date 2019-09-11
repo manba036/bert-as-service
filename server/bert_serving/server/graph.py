@@ -126,14 +126,11 @@ def optimize_graph(args, logger=None):
 
         with tf.Session(config=config) as sess:
             logger.info('load parameters from checkpoint...')
-            logger.info('[mnb] debug with TensorBoard')
+            logger_mnb = set_logger(colored('OPTIMIZE_GRAPH', 'red'), args.verbose)
+            logger_mnb.info('visualize model with tensorboard')
             with tf.name_scope('summary'):
-                tf.summary.tensor_summary('output_tensors', output_tensors)
-                tf.summary.tensor_summary('pooled', pooled)
-                tf.summary.tensor_summary('encoder_layer', encoder_layer)
-                tf.summary.tensor_summary('input_mask', input_mask)
-                merged = tf.summary.merge_all()
-                writer = tf.summary.FileWriter('./logs', graph=sess.graph)
+                tf.summary.merge_all()
+                tf.summary.FileWriter('./logs', graph=sess.graph)
 
             sess.run(tf.global_variables_initializer())
             dtypes = [n.dtype for n in input_tensors]

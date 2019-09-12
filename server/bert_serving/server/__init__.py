@@ -550,13 +550,15 @@ class BertWorker(Process):
 
     def input_fn_builder(self, socks, tf, sink):
         from .bert.extract_features import convert_lst_to_features
-        from .bert.tokenization import FullTokenizer
+        # from https://github.com/yoheikikuta/bert-japanese/blob/master/src/tokenization_sentencepiece.py
+        from .bert.tokenization_sentencepiece import FullTokenizer
 
         def gen():
             # Windows does not support logger in MP environment, thus get a new logger
             # inside the process for better compatibility
             logger = set_logger(colored('WORKER-%d' % self.worker_id, 'yellow'), self.verbose)
-            tokenizer = FullTokenizer(vocab_file=os.path.join(self.model_dir, 'vocab.txt'), do_lower_case=self.do_lower_case)
+            # from https://github.com/yoheikikuta/bert-japanese/blob/master/src/extract_features.py
+            tokenizer = FullTokenizer(model_file=os.path.join(self.model_dir, 'wiki-ja.model'), vocab_file=os.path.join(self.model_dir, 'wiki-ja.vocab'), do_lower_case=self.do_lower_case)
 
             poller = zmq.Poller()
             for sock in socks:

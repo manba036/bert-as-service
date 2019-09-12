@@ -14,7 +14,8 @@
 # limitations under the License.
 import re
 
-from . import tokenization
+# from https://github.com/yoheikikuta/bert-japanese/blob/master/src/tokenization_sentencepiece.py
+from . import tokenization_sentencepiece as tokenization
 
 __all__ = ['convert_lst_to_features']
 

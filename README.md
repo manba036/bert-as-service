@@ -188,25 +188,36 @@ Note that you only need `pip install -U bert-serving-client` in this case, the s
 
 <h2 align="center">Getting Started (manba036 Special Edition)</h2>
 
-First on the terminal
+Supported Japanese with reference to [bert-japanese](https://github.com/yoheikikuta/bert-japanese)
+
+#### Prepare
 
 ```bash
+sudo apt-get install -y python3 python3-pip python3-dev
+
+pip3 install setuptools
+pip3 install tensorflow==1.14.0
+pip3 install tensorboard==1.14.0
+pip3 install sentencepiece
+
 git clone https://github.com/manba036/bert-as-service.git
 cd bert-as-service
-./run_local_with_english_model.sh
 ```
 
-Then on another terminal
+#### First on the terminal
 
 ```bash
-cd bert-as-service/client
-python3 setup.py install
-cd ..
+./run_local.sh
+```
+
+#### Then on another terminal
+
+```bash
 ./test.py
 ./run_tensorboard.sh
 ```
 
-Then open http://localhost:6006 in your browser.
+#### Then open [TensorBoard](http://localhost:6006) in your browser.
 
 
 <h2 align="center">Server and Client API</h2>

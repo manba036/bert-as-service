@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import sys
-sys.path.append("./server/bert_serving/server/bert")
-
-
 import numpy as np
 from bert_serving.client import BertClient
-import tokenization_sentencepiece as tokenization
 
 
 TEXT_LIST = [
@@ -20,21 +15,14 @@ TEXT_LIST = [
     '「富士サファリパーク」です。',
     ]
 
-tokenizer = tokenization.FullTokenizer(
-    model_file='./model/bert-wiki-ja/wiki-ja.model',
-    vocab_file='./model/bert-wiki-ja/wiki-ja.vocab',
-    do_lower_case=True
-    )
-
 bc = BertClient()
 
 for text in TEXT_LIST:
-    tokens = tokenizer.tokenize(text)
-    result = bc.encode([text])
+    result = bc.encode([text], show_tokens=True)
     print('########################################')
     print('text        :', text)
-    print('tokens      :', tokens)
-    print('len(tokens) :', len(tokens))
-    print('shape       :', result.shape)
-    print('norm        :', np.linalg.norm(result[0]))
-    print('embeddings  :', '[', result[0][0], result[0][1], '...', result[0][-2], result[0][-1], ']')
+    print('tokens      :', result[1][0])
+    print('len(tokens) :', len(result[1][0]))
+    print('shape       :', result[0].shape)
+    print('norm        :', np.linalg.norm(result[0][0]))
+    print('embeddings  :', '[', result[0][0][0], result[0][0][1], '...', result[0][0][-2], result[0][0][-1], ']')

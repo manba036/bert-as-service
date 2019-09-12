@@ -56,4 +56,4 @@ cd client
 sudo python3 setup.py install
 cd ..
 
-bert-serving-start -model_dir ${PATH_MODEL} -ckpt_name ${CKPT_NAME} -config_name ${CONFIG_NAME} -graph_tmp_dir ${TMP_DIR} -cpu -max_seq_len=NONE -num_worker=${NUM_WORKER}
+bert-serving-start -model_dir ${PATH_MODEL} -ckpt_name ${CKPT_NAME} -config_name ${CONFIG_NAME} -graph_tmp_dir ${TMP_DIR} -cpu -max_seq_len=NONE -show_tokens_to_client -num_worker=${NUM_WORKER}

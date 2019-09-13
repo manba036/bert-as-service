@@ -10,6 +10,8 @@ LOGS_DIR=`pwd`/logs
 TMP_DIR=`pwd`/tmp
 PATH_MODEL=${MODEL_DIR}/${MODEL_NAME}
 
+export ZEROMQ_SOCK_TMP_DIR=${TMP_DIR}
+
 echo "MODEL = ${PATH_MODEL}"
 
 mkdir -p ${PATH_MODEL}

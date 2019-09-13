@@ -204,13 +204,15 @@ git clone https://github.com/manba036/bert-as-service.git
 cd bert-as-service
 ```
 
-#### First on the terminal
+#### First start a terminal and execute the following command
+
+run_local.sh installs bert-serving-server and bert-serving-client with Japanese support.
 
 ```bash
 ./run_local.sh
 ```
 
-#### Then on another terminal
+#### After the message “all set, ready to serve request!” is displayed, start another terminal and execute the following command
 
 ```bash
 ./test.py

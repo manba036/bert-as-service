@@ -26,3 +26,4 @@ for text in TEXT_LIST:
     print('shape       :', result[0].shape)
     print('norm        :', np.linalg.norm(result[0][0]))
     print('embeddings  :', '[', result[0][0][0], result[0][0][1], '...', result[0][0][-2], result[0][0][-1], ']')
+    print()

@@ -244,7 +244,7 @@ cd bert-as-service
 
 ```bash
 docker exec -it bert-as-service /app/work/check_work.py
-docker exec -it bert-as-service /app/run_tensorboard.py
+docker exec -it bert-as-service /app/run_tensorboard.sh
 ```
 
 #### for docker : Then open [TensorBoard](http://localhost:6006) in your browser.

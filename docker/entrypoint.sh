@@ -1,2 +1,11 @@
-#!/bin/sh
-bert-serving-start -num_worker=$1 -model_dir /model
+#!/bin/bash
+CKPT_NAME=$1
+CONFIG_NAME=$2
+NUM_WORKER=$3
+
+MODEL_DIR=/app/model
+TMP_DIR=/app/tmp
+
+export ZEROMQ_SOCK_TMP_DIR=${TMP_DIR}
+
+bert-serving-start -model_dir ${MODEL_DIR} -ckpt_name ${CKPT_NAME} -config_name ${CONFIG_NAME} -graph_tmp_dir ${TMP_DIR} -cpu -max_seq_len=NONE -show_tokens_to_client -num_worker=${NUM_WORKER}

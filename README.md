@@ -221,6 +221,33 @@ run_local.sh installs bert-serving-server and bert-serving-client with Japanese 
 
 #### Then open [TensorBoard](http://localhost:6006) in your browser.
 
+<h2 align="center">Getting Started for docker (manba036 Special Edition)</h2>
+
+Supported Japanese with reference to [bert-japanese](https://github.com/yoheikikuta/bert-japanese)
+
+#### for docker : Prepare
+
+```bash
+git clone https://github.com/manba036/bert-as-service.git
+cd bert-as-service
+```
+
+#### for docker : First start a terminal and execute the following command
+
+```bash
+./run_docker.sh
+```
+
+#### for docker : After the message “all set, ready to serve request!” is displayed, start another terminal and execute the following command
+
+/app/work and bert-as-service/work are shared volumes.
+
+```bash
+docker exec -it bert-as-service /app/work/check_work.py
+docker exec -it bert-as-service /app/run_tensorboard.py
+```
+
+#### for docker : Then open [TensorBoard](http://localhost:6006) in your browser.
 
 <h2 align="center">Server and Client API</h2>
 <p align="right"><a href="#bert-as-service"><sup>▴ Back to top</sup></a></p>

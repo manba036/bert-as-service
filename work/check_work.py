@@ -6,11 +6,6 @@ from bert_serving.client import BertClient
 
 
 TEXT_LIST = [
-    'First do it',
-    'then do it right',
-    'then do it better',
-    'すべての人間は、生れながらにして自由であり、かつ、尊厳と権利とについて平等である。',
-    '人間は、理性と良心とを授けられており、互いに同胞の精神をもって行動しなければならない。',
     '「富士〜」で有名な動物園は？',
     '「富士サファリパーク」です。',
     ]

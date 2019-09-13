@@ -1,3 +1,4 @@
+import codecs
 from os import path
 
 from setuptools import setup, find_packages
@@ -16,7 +17,7 @@ setup(
     version=__version__,  # noqa
     description='Mapping a variable-length sentence to a fixed-length vector using BERT model (Client)',
     url='https://github.com/hanxiao/bert-as-service',
-    long_description=open('README.md', 'r').read(),
+    long_description=codecs.open('README.md', 'r', 'utf-8').read(),
     long_description_content_type='text/markdown',
     author='Han Xiao',
     author_email='artex.xh@gmail.com',

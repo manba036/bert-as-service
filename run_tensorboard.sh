@@ -1,3 +1,3 @@
 #!/bin/bash
 
-tensorboard --logdir=./logs
+tensorboard --logdir=${TENSORFLOW_LOGS_DIR}

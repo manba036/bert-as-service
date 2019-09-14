@@ -3,6 +3,6 @@
 logs
 model
 tmp
-work
+notebook
 run_docker.sh
 run_local.sh

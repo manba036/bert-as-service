@@ -1,20 +1,22 @@
-#!/bin/sh
+#!/bin/bash
+JUPYTER_PORT=$1
+if [ -z "${JUPYTER_PORT}" ]; then
+  JUPYTER_PORT=8888
+fi
+echo "JUPYTER_PORT = ${JUPYTER_PORT}"
 
 MODEL_NAME=bert-wiki-ja
 CKPT_NAME=model.ckpt-1400000
 CONFIG_NAME=bert-wiki-ja_config.json
 NUM_WORKER=1
 
+PROJECT_NAME=$(basename `pwd`)
+CONTAINER_NAME=${PROJECT_NAME}_jupyter
 MODEL_DIR=`pwd`/model
 LOGS_DIR=`pwd`/logs
 TMP_DIR=`pwd`/tmp
+NOTEBOOK_DIR=`pwd`/notebook
 PATH_MODEL=${MODEL_DIR}/${MODEL_NAME}
-
-export TENSORFLOW_LOGS_DIR=${TMP_DIR}
-export ZEROMQ_SOCK_TMP_DIR=${TMP_DIR}
-export BERT_SERVER_MODEL_DIR=${PATH_MODEL}
-
-echo "MODEL = ${PATH_MODEL}"
 
 mkdir -p ${PATH_MODEL}
 sudo rm -Rf ${LOGS_DIR}
@@ -52,12 +54,21 @@ if [ ! -e "${PATH_MODEL}/${CONFIG_NAME}" ]; then
   cp ${CONFIG_NAME} ${PATH_MODEL}
 fi
 
-cd server
-sudo python3 setup.py install
-cd ..
+docker build \
+  -t ${CONTAINER_NAME} \
+  --build-arg JUPYTER_PORT=${JUPYTER_PORT} \
+  -f ./docker/Dockerfile.jupyter \
+  .
 
-cd client
-sudo python3 setup.py install
-cd ..
-
-bert-serving-start -model_dir ${PATH_MODEL} -ckpt_name ${CKPT_NAME} -config_name ${CONFIG_NAME} -graph_tmp_dir ${TMP_DIR} -cpu -max_seq_len=NONE -show_tokens_to_client -num_worker=${NUM_WORKER}
+docker run \
+  --rm -it \
+  --name=${CONTAINER_NAME} \
+  -p 5555:5555 \
+  -p 5556:5556 \
+  -p 6006:6006 \
+  -p ${JUPYTER_PORT}:${JUPYTER_PORT} \
+  -v ${PATH_MODEL}:/app/model \
+  -v ${LOGS_DIR}:/app/logs \
+  -v ${TMP_DIR}:/app/tmp \
+  -v ${NOTEBOOK_DIR}:/app/notebook \
+  ${CONTAINER_NAME}

@@ -9,7 +9,7 @@ PROJECT_NAME=$(basename `pwd`)
 MODEL_DIR=`pwd`/model
 LOGS_DIR=`pwd`/logs
 TMP_DIR=`pwd`/tmp
-WORK_DIR=`pwd`/work
+NOTEBOOK_DIR=`pwd`/notebook
 PATH_MODEL=${MODEL_DIR}/${MODEL_NAME}
 
 mkdir -p ${PATH_MODEL}
@@ -58,6 +58,6 @@ docker run \
   -v ${PATH_MODEL}:/app/model \
   -v ${LOGS_DIR}:/app/logs \
   -v ${TMP_DIR}:/app/tmp \
-  -v ${WORK_DIR}:/app/work \
+  -v ${NOTEBOOK_DIR}:/app/notebook \
   ${PROJECT_NAME} \
   ${CKPT_NAME} ${CONFIG_NAME} ${NUM_WORKER}

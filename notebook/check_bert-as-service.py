@@ -25,3 +25,5 @@ for text in TEXT_LIST:
     print('norm        :', np.linalg.norm(embeddings))
     print('embeddings  :', '[', embeddings[0], embeddings[1], '...', embeddings[-2], embeddings[-1], ']')
     print()
+
+bc.close()

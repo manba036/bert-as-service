@@ -221,6 +221,12 @@ run_local.sh installs bert-serving-server and bert-serving-client with Japanese 
 
 #### Then open [TensorBoard](http://localhost:6006) in your browser.
 
+#### Finally
+
+```bash
+bert-serving-terminate -port 5555
+```
+
 <h2 align="center">Getting Started for docker (manba036 Special Edition)</h2>
 
 Supported Japanese with reference to [bert-japanese](https://github.com/yoheikikuta/bert-japanese)
@@ -240,14 +246,41 @@ cd bert-as-service
 
 #### for docker : After the message “all set, ready to serve request!” is displayed, start another terminal and execute the following command
 
-/app/work and bert-as-service/work are shared volumes.
+/app/notebook and bert-as-service/notebook are shared volumes.
 
 ```bash
-docker exec -it bert-as-service /app/work/check_work.py
+docker exec -it bert-as-service /app/notebook/check_bert-as-service.py
 docker exec -it bert-as-service /app/run_tensorboard.sh
 ```
 
 #### for docker : Then open [TensorBoard](http://localhost:6006) in your browser.
+
+#### for docker : Finally
+
+```bash
+docker exec -it bert-as-service bert-serving-terminate -port 5555
+```
+
+<h2 align="center">Getting Started for jupyter (manba036 Special Edition)</h2>
+
+Supported Japanese with reference to [bert-japanese](https://github.com/yoheikikuta/bert-japanese)
+
+#### for jupyter : Prepare
+
+```bash
+git clone https://github.com/manba036/bert-as-service.git
+cd bert-as-service
+```
+
+#### for jupyter : First start a terminal and execute the following command
+
+```bash
+./run_jupyter.sh
+```
+
+#### for jupyter : After the message “Or copy and paste one of these URLs:” is displayed, open URL of JupyterLab in your browser, then open notebook/check_bert-as-service.ipynb
+
+/app/notebook and bert-as-service/notebook are shared volumes.
 
 <h2 align="center">Server and Client API</h2>
 <p align="right"><a href="#bert-as-service"><sup>▴ Back to top</sup></a></p>

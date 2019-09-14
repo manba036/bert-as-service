@@ -130,7 +130,8 @@ def optimize_graph(args, logger=None):
             logger_mnb.info('visualize model with tensorboard')
             with tf.name_scope('summary'):
                 tf.summary.merge_all()
-                tf.summary.FileWriter('./logs', graph=sess.graph)
+                logs_dir = os.environ['TENSORFLOW_LOGS_DIR']
+                tf.summary.FileWriter(logs_dir, graph=sess.graph)
 
             sess.run(tf.global_variables_initializer())
             dtypes = [n.dtype for n in input_tensors]

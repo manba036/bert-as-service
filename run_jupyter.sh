@@ -13,6 +13,7 @@ NUM_WORKER=1
 PROJECT_NAME=$(basename `pwd`)
 CONTAINER_NAME=${PROJECT_NAME}_jupyter
 MODEL_DIR=`pwd`/model
+DATA_DIR=`pwd`/data
 LOGS_DIR=`pwd`/logs
 TMP_DIR=`pwd`/tmp
 NOTEBOOK_DIR=`pwd`/notebook
@@ -68,6 +69,7 @@ docker run \
   -p 6006:6006 \
   -p ${JUPYTER_PORT}:${JUPYTER_PORT} \
   -v ${PATH_MODEL}:/app/model \
+  -v ${DATA_DIR}:/app/data \
   -v ${LOGS_DIR}:/app/logs \
   -v ${TMP_DIR}:/app/tmp \
   -v ${NOTEBOOK_DIR}:/app/notebook \

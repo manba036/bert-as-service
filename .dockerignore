@@ -1,5 +1,6 @@
 .git
 .github
+data
 logs
 model
 tmp
